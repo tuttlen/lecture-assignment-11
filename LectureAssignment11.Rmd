@@ -13,18 +13,45 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Lecture Assignment
 Half of you will be assigned to find a series that is less volatile than the S&P 500, the other half a series that is more volatile.
-Download the data.
 
+### Download the data.
+```{r Download data}
+library(tseries)
+volatility<-get.hist.quote('^vix',quote='Close')
+snpData<- get.hist.quote('^gspc',quote='Close')
+amznData <-get.hist.quote('amzn',quote='Close')
+applData <-get.hist.quote('aapl',quote='Close')
+
+```
 ### *Calculate log returns.*
 ```{r Log returns}
 
-library(tseries)
 
-snpData<- get.hist.quote('^gspc',quote='Close')
+
+
 
 snpPret<-log(lag(snpData)) - log(snpData)
 
-snpPret
+
+
+latestVolatilitysnp<-tail(snpPret,1)$Close[[1]]
+
+
+
+amznVol<-log(lag(amznData)) - log(amznData)
+latestVolatilityAmzn<-tail(amznVol,1)$Close[[1]]
+
+
+aaplVol<-log(lag(applData)) - log(applData)
+latestVolatilityAAPL<-tail(aaplVol,1)$Close[[1]]
+
+# snp is more volatile then Amazon
+latestVolatilitysnp<latestVolatilityAmzn
+
+# SNP is less volatile then Apple
+latestVolatilitysnp<latestVolatilityAAPL
+
+
 ```
 
 ### Calculate volatility measure.
@@ -49,19 +76,49 @@ Vol<- function(d,logrets)
 ```
 ### Calculate volatility over entire length of series for various three different decay factors.
 ```{r Volatility over length with 3 Different Decay Factors}
+amazonVolest1<-Vol(10,amznData)
+amazonVolest2<-Vol(30,amznData)
+amazonVolest3<-Vol(100,amznData)
 
+aapleVolest1<-Vol(10,applData)
+aapleVolest2<-Vol(30,applData)
+aapleVolest3<-Vol(100,applData)
 ```
 
 ### Plot the results, overlaying the volatility curves on the data, just as was done in the S&P example.
-```{r Plotted Results}
+```{r amznData Results}
+plot(snpData)
 
+plot(amazonVolest1, type='l',col='red')
+par(new=TRUE)
+plot(amazonVolest2, type='l',col='blue')
+par(new=TRUE)
+plot(amazonVolest3, type='l',col='green')
+title("Amazon is more volatile then the S&P 500")
+
+plot(applData)
+plot(aapleVolest1, type='l',col='red')
+par(new=TRUE)
+plot(aapleVolest2, type='l',col='blue')
+par(new=TRUE)
+plot(aapleVolest3, type='l',col='green')
+title("Apple is less volatile then the S&P 500")
+
+
+#applData
 ```
 
 # Deliverable
-*Upload the Markdown file containing your code, analysis, and discussion to GitHub. Post a link to the Markdown file in the space below.
-The markdown document should have code for entering the data, calculating log returns, calculating volatility measure, and calculating volatility for the entire series using three different decay factors.
-Also needs to have code for a plot (and the plot itself) with the data and volatility overlaid.
-The discussion board will talk about the differences in the volatility plots for different stocks.
-*
+  - Upload the Markdown file containing your code, analysis, and discussion to GitHub. 
+  - Post a link to the Markdown file in the space below.
+  - The markdown document should have code for:
+      - entering the data, 
+      - calculating log returns, 
+      - calculating volatility measure, and 
+      - calculating volatility for the entire series using three different decay factors.
+      - Also needs to have code for a plot (and the plot itself) with the data and volatility overlaid.
+      
+# *The discussion board will talk about the differences in the volatility plots for different stocks.*
+
 
 
