@@ -2,27 +2,60 @@
 title: "Volatility"
 author: "Nathan J. Tuttle"
 date: "March 22, 2017"
-output: html_document
+output: 
+  html_document:
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Lecture Assignment
 Half of you will be assigned to find a series that is less volatile than the S&P 500, the other half a series that is more volatile.
 Download the data.
 
 ### *Calculate log returns.*
 ```{r Log returns}
 
+library(tseries)
+
+snpData<- get.hist.quote('^gspc',quote='Close')
+
+snpPret<-log(lag(snpData)) - log(snpData)
+
+snpPret
 ```
 
 ### Calculate volatility measure.
+```{r Volatility measure}
 
+#Volatility
+SNVol <- sd(snpPret) * sqrt(250) *100
+
+Vol<- function(d,logrets)
+{
+  var=0
+  lam=0
+  varlist<-NULL
+  for(r in logrets)
+  {
+    lam=lam*(1- 1/d) +1
+    var = (1 - 1/lam)*var + (1/lam)*r^2
+      varlist<- c(varlist,var)
+  }
+  sqrt(varlist)
+}
+```
 ### Calculate volatility over entire length of series for various three different decay factors.
+```{r Volatility over length with 3 Different Decay Factors}
+
+```
 
 ### Plot the results, overlaying the volatility curves on the data, just as was done in the S&P example.
+```{r Plotted Results}
+
+```
 
 # Deliverable
 *Upload the Markdown file containing your code, analysis, and discussion to GitHub. Post a link to the Markdown file in the space below.
