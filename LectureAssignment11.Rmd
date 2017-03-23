@@ -86,22 +86,23 @@ aapleVolest3<-Vol(100,applData)
 ```
 
 ### Plot the results, overlaying the volatility curves on the data, just as was done in the S&P example.
-```{r amznData Results}
-plot(snpData)
-
+```{r Plot Volatility Results}
+plot(amznData)
+#par(new=FALSE)
 plot(amazonVolest1, type='l',col='red')
-par(new=TRUE)
-plot(amazonVolest2, type='l',col='blue')
-par(new=TRUE)
-plot(amazonVolest3, type='l',col='green')
+#par(new=TRUE)
+lines(amazonVolest2, type='l',col='blue')
+#par(new=TRUE)
+lines(amazonVolest3, type='l',col='green')
 title("Amazon is more volatile then the S&P 500")
 
 plot(applData)
+
 plot(aapleVolest1, type='l',col='red')
-par(new=TRUE)
-plot(aapleVolest2, type='l',col='blue')
-par(new=TRUE)
-plot(aapleVolest3, type='l',col='green')
+#par(new=TRUE)
+lines(aapleVolest2, type='l',col='blue')
+#par(new=TRUE)
+lines(aapleVolest3, type='l',col='green')
 title("Apple is less volatile then the S&P 500")
 
 

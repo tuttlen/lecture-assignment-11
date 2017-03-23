@@ -126,38 +126,39 @@ aapleVolest3<-Vol(100,applData)
 ### Plot the results, overlaying the volatility curves on the data, just as was done in the S&P example.
 
 ```r
-plot(snpData)
+plot(amznData)
 ```
 
-![](LectureAssignment11_files/figure-html/amznData Results-1.png)<!-- -->
+![](LectureAssignment11_files/figure-html/Plot Volatility Results-1.png)<!-- -->
 
 ```r
+#par(new=FALSE)
 plot(amazonVolest1, type='l',col='red')
-par(new=TRUE)
-plot(amazonVolest2, type='l',col='blue')
-par(new=TRUE)
-plot(amazonVolest3, type='l',col='green')
+#par(new=TRUE)
+lines(amazonVolest2, type='l',col='blue')
+#par(new=TRUE)
+lines(amazonVolest3, type='l',col='green')
 title("Amazon is more volatile then the S&P 500")
 ```
 
-![](LectureAssignment11_files/figure-html/amznData Results-2.png)<!-- -->
+![](LectureAssignment11_files/figure-html/Plot Volatility Results-2.png)<!-- -->
 
 ```r
 plot(applData)
 ```
 
-![](LectureAssignment11_files/figure-html/amznData Results-3.png)<!-- -->
+![](LectureAssignment11_files/figure-html/Plot Volatility Results-3.png)<!-- -->
 
 ```r
 plot(aapleVolest1, type='l',col='red')
-par(new=TRUE)
-plot(aapleVolest2, type='l',col='blue')
-par(new=TRUE)
-plot(aapleVolest3, type='l',col='green')
+#par(new=TRUE)
+lines(aapleVolest2, type='l',col='blue')
+#par(new=TRUE)
+lines(aapleVolest3, type='l',col='green')
 title("Apple is less volatile then the S&P 500")
 ```
 
-![](LectureAssignment11_files/figure-html/amznData Results-4.png)<!-- -->
+![](LectureAssignment11_files/figure-html/Plot Volatility Results-4.png)<!-- -->
 
 ```r
 #applData
